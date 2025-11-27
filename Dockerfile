@@ -1,8 +1,7 @@
-FROM ubuntu:18.04
-MAINTAINER uli.hitzel@gmail.com
+FROM ubuntu:22.04
 EXPOSE 8080 5901
 ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=Asia/Singapore
+ENV TZ=Europe/Paris
 
 RUN apt-get update
 RUN apt-get install -y xfce4 xfce4-terminal
@@ -29,9 +28,9 @@ RUN apt-get -y install gedit vim
 USER user
 
 WORKDIR /.novnc
-RUN wget -qO- https://github.com/novnc/noVNC/archive/v1.0.0.tar.gz | tar xz --strip 1 -C $PWD
+RUN wget -qO- https://github.com/novnc/noVNC/archive/v1.6.0.tar.gz | tar xz --strip 1 -C $PWD
 RUN mkdir /.novnc/utils/websockify
-RUN wget -qO- https://github.com/novnc/websockify/archive/v0.6.1.tar.gz | tar xz --strip 1 -C /.novnc/utils/websockify
+RUN wget -qO- https://github.com/novnc/websockify/archive/v0.13.0.tar.gz | tar xz --strip 1 -C /.novnc/utils/websockify
 RUN ln -s vnc.html index.html
 
 WORKDIR /home/user
