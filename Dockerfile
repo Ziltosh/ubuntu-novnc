@@ -29,8 +29,6 @@ USER user
 
 WORKDIR /.novnc
 RUN wget -qO- https://github.com/novnc/noVNC/archive/v1.6.0.tar.gz | tar xz --strip 1 -C $PWD
-RUN mkdir /.novnc/utils/websockify
-RUN wget -qO- https://github.com/novnc/websockify/archive/v0.13.0.tar.gz | tar xz --strip 1 -C /.novnc/utils/websockify
 RUN ln -s vnc.html index.html
 
 WORKDIR /home/user
