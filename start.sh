@@ -6,4 +6,4 @@ then
 fi
 
 printf "$vncpassword\n$vncpassword\n\n" | vncserver :1
-.novnc/utils/novnc_proxy --vnc localhost:5901
+/.novnc/utils/novnc_proxy --vnc localhost:5901
