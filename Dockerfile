@@ -38,7 +38,11 @@ RUN \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
-RUN apt-get -y install gedit vim
+RUN \
+  apt-get update && apt-get -y install gedit vim \
+  && apt-get autoclean \
+  && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
+  
 USER user
 
 RUN wget -O https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5tester.setup.exe
