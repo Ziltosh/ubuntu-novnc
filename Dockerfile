@@ -38,12 +38,10 @@ RUN \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
-#WORKDIR /tmp
-#RUN wget https://github.com/atom/atom/releases/download/v1.48.0/atom-amd64.deb
-#RUN apt-get -y install gvfs-bin
-#RUN dpkg -i atom-amd64.deb
 RUN apt-get -y install gedit vim
 USER user
+
+RUN wget -O https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5tester.setup.exe
 
 WORKDIR /.novnc
 RUN wget -qO- https://github.com/novnc/noVNC/archive/v1.6.0.tar.gz | tar xz --strip 1 -C $PWD
