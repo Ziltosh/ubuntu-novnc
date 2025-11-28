@@ -40,7 +40,7 @@ COPY config /home/user
 RUN chown -R user:user /home/user
 
 ENV TITLE=Metatrader5
-ENV WINEPREFIX="/config/.wine"
+ENV WINEPREFIX="/home/user/.wine"
 ENV WINEDEBUG=-all
 
 RUN \
