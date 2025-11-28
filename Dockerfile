@@ -25,7 +25,6 @@ ENV WINEPREFIX="/config/.wine"
 ENV WINEDEBUG=-all
 
 RUN \
-  apt-get update && \
   apt-get install --no-install-recommends -y \
     ca-certificates \
   && mkdir -pm755 /etc/apt/keyrings \
@@ -35,17 +34,16 @@ RUN \
   && apt-get update \
   && apt-get install --install-recommends -y winehq-stable \
   && echo "**** cleanup ****" \
-  && apt-get autoclean \
-  && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
+  && apt-get autoclean
 
 RUN \
-  apt-get update && apt-get -y install gedit vim \
+  apt-get -y install gedit vim \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
   
 USER user
 
-RUN wget -O https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5tester.setup.exe
+#RUN wget -O https://download.mql5.com/cdn/web/metaquotes.software.corp/mt5/mt5tester.setup.exe
 
 WORKDIR /.novnc
 RUN wget -qO- https://github.com/novnc/noVNC/archive/v1.6.0.tar.gz | tar xz --strip 1 -C $PWD
