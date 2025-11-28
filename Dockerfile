@@ -20,6 +20,24 @@ RUN chown user:user /.novnc
 COPY config /home/user
 RUN chown -R user:user /home/user
 
+ENV TITLE=Metatrader5
+ENV WINEPREFIX="/config/.wine"
+ENV WINEDEBUG=-all
+
+RUN \
+  apt-get update && \
+  apt-get install --no-install-recommends -y \
+    ca-certificates \
+  && mkdir -pm755 /etc/apt/keyrings \
+  && wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key \
+  && wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources \
+  && dpkg --add-architecture i386 \
+  && apt-get update \
+  && apt-get install --install-recommends -y winehq-stable \
+  && echo "**** cleanup ****" \
+  && apt-get autoclean \
+  && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
+
 #WORKDIR /tmp
 #RUN wget https://github.com/atom/atom/releases/download/v1.48.0/atom-amd64.deb
 #RUN apt-get -y install gvfs-bin
