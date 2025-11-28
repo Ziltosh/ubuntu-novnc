@@ -18,6 +18,12 @@ RUN useradd -ms /bin/bash user
 RUN mkdir /.novnc
 RUN chown user:user /.novnc
 
+# 2. Ajouter l'utilisateur au groupe sudo
+RUN usermod -aG sudo user
+
+# 3. Configurer sudo pour ne PAS demander de mot de passe
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
 COPY config /home/user
 RUN chown -R user:user /home/user
 
