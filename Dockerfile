@@ -8,6 +8,7 @@ RUN apt-get install -y xfce4 xfce4-terminal xubuntu-default-settings xubuntu-ico
 RUN apt-get install -y novnc
 RUN apt-get install -y tightvncserver websockify
 RUN apt-get install -y wget net-tools wget curl openssh-client git
+RUN apt-get install -y software-properties-common
 RUN apt-get install -y sudo
 ENV USER root
 
