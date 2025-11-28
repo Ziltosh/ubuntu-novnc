@@ -59,12 +59,13 @@ RUN \
   apt-get -y install gedit vim \
   && apt-get autoclean \
   && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
+
+
+COPY ./mt5.sh /home/user/mt5.sh
+RUN chmod +x /home/user/mt5.sh
+RUN /home/user/mt5.sh
   
 USER user
-
-COPY ./mt5.sh mt5.sh
-RUN chmod +x mt5.sh
-RUN mt5.sh
 
 WORKDIR /.novnc
 RUN wget -qO- https://github.com/novnc/noVNC/archive/v1.6.0.tar.gz | tar xz --strip 1 -C $PWD
