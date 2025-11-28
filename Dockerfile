@@ -7,9 +7,20 @@ RUN apt-get update
 RUN apt-get install -y xfce4 xfce4-terminal xubuntu-default-settings xubuntu-icon-theme
 RUN apt-get install -y novnc
 RUN apt-get install -y tightvncserver websockify
-RUN apt-get install -y wget net-tools wget curl chromium-browser firefox openssh-client git
+RUN apt-get install -y wget net-tools wget curl openssh-client git
 RUN apt-get install -y sudo
 ENV USER root
+
+# 2. Ajouter le PPA officiel de l'équipe Mozilla (pour avoir la version non-Snap)
+RUN add-apt-repository -y ppa:mozillateam/ppa
+
+# 3. Prioriser ce dépôt pour éviter qu'Ubuntu ne réessaie d'installer Snap
+RUN echo 'Package: *' > /etc/apt/preferences.d/mozilla-firefox && \
+    echo 'Pin: release o=LP-PPA-mozillateam' >> /etc/apt/preferences.d/mozilla-firefox && \
+    echo 'Pin-Priority: 1001' >> /etc/apt/preferences.d/mozilla-firefox
+
+# 4. Installer Firefox "proprement"
+RUN apt-get update && apt-get install -y firefox
 
 COPY start.sh /start.sh
 RUN chmod a+x /start.sh
